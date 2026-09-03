@@ -1,0 +1,24 @@
+{
+  "name": "minion",
+  "version": "0.0.1",
+  "description": "Self-hosted relay for OpenAI Codex.",
+  "homepage": "https://github.com/bereilhp/minion#readme",
+  "bugs": {
+    "url": "https://github.com/bereilhp/minion/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bereilhp/minion.git"
+  },
+  "license": "MIT",
+  "author": "bereilhp",
+  "type": "module",
+  "scripts": {
+    "start": "anana",
+    "dev": "anana --port 3000",
+    "start:quiet": "anana --quiet"
+  },
+  "dependencies": {
+    "ananajs": "^0.3.1"
+  }
+}
