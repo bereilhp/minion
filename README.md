@@ -1,6 +1,8 @@
 # minion
 Self-hosted relay for OpenAI Codex via [ananajs](https://www.npmjs.com/package/ananajs).
 
+> Note: uses one-shot `codex exec` (non-interactive, no approvals) — not `codex app-server`.
+
 ## Prereqs
 - Node 24+
 - `codex` authenticated: `codex login`
