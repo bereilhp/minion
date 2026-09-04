@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { HttpError, notFound, badRequest } from "ananajs";
 
 // POST /exec
-// Body: { prompt: string, workdir?: string, model?: string, effort?: string, sandbox?: string, approval?: string, timeoutMs?: number, json?: boolean }
+// Body: { prompt: string, workdir?: string, model?: string, effort?: string, sandbox?: string, timeoutMs?: number, json?: boolean }
 export async function POST(ctx) {
   const body = await ctx.body();
 
@@ -15,7 +15,6 @@ export async function POST(ctx) {
   const model = body.model || "gpt-5.6-luna";
   const effort = body.effort || "medium"; // low | medium | high | xhigh
   const sandbox = body.sandbox; // read-only | workspace-write | danger-full-access
-  const approval = body.approval; // on-request | never  (-a)
   const useJson = body.json === true;
   const timeoutMs = Number(body.timeoutMs) || 10 * 60 * 1000; // 10 min default (codex can be slow)
 
@@ -25,7 +24,6 @@ export async function POST(ctx) {
   args.push("-m", model);
   args.push("-c", `model_reasoning_effort=${JSON.stringify(effort)}`);
   if (sandbox) args.push("-s", sandbox);
-  if (approval) args.push("-a", approval);
   if (body.workdir || body.cwd) args.push("-C", workdir);
   // pass prompt as final arg; if too large, we fallback to stdin
   const promptNeedsStdin = prompt.length > 8000;

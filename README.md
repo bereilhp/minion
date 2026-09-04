@@ -35,7 +35,6 @@ Body:
   "model": "gpt-5.6-luna",
   "effort": "medium",
   "sandbox": "workspace-write",
-  "approval": "never",
   "timeoutMs": 300000,
   "json": false
 }
@@ -44,16 +43,15 @@ Only `prompt` is required.
 
 Defaults (`exec/route.js:14`):
 
-| Key | Default when omitted | Notes |
-|---|---|---|
-| `prompt` | — (required, `400` if missing) | `>8000` chars sent via stdin |
-| `workdir` / `cwd` | `process.cwd()` (where you ran `anana`) | Passed as `-C` only if set |
-| `model` | `gpt-5.6-luna` (`-m`) |  |
-| `effort` | `medium` (`-c model_reasoning_effort`) | `low` / `medium` / `high` / `xhigh` |
-| `sandbox` | not sent → Codex default `read-only` | `-s`: `read-only` / `workspace-write` / `danger-full-access` |
-| `approval` | not sent → Codex default `never` | `-a`: `never` (auto-run) / `on-request` (model asks) |
-| `timeoutMs` | `600000` (10 min) |  |
-| `json` | `false` | `true` adds `--json` (JSONL events) |
+| Option | Default |
+|---|---|
+| `prompt` | required |
+| `workdir` / `cwd` | `process.cwd()` |
+| `model` | `gpt-5.6-luna` |
+| `effort` | `medium` |
+| `sandbox` | Codex default (`read-only`) |
+| `timeoutMs` | `600000` (10 min) |
+| `json` | `false` |
 
 Full machine access (dangerous — whole FS, no sandbox):
 
@@ -61,8 +59,7 @@ Full machine access (dangerous — whole FS, no sandbox):
 {
   "prompt": "list all projects in ~",
   "workdir": "/",
-  "sandbox": "danger-full-access",
-  "approval": "never"
+  "sandbox": "danger-full-access"
 }
 ```
 
